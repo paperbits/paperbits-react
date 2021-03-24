@@ -1,0 +1,23 @@
+{
+    "name": "@paperbits/react",
+    "version": "1.0.1",
+    "description": "React modules for Paperbits.",
+    "license": "MIT",
+    "author": "Paperbits",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/paperbits/paperbits-react.git"
+    },
+    "keywords": [
+        "paperbits",
+        "react"
+    ],
+    "dependencies": {
+        "@paperbits/common": "0.1.389",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2"
+    },
+    "devDependencies": {
+        "@types/react": "^17.0.3"
+    }
+}
