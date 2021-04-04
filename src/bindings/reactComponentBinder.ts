@@ -13,6 +13,24 @@ import { WidgetBinding } from "@paperbits/common/editing/widgetBinding";
 
 export class ReactComponentBinder implements ComponentBinder {
     public init(element: Element, binding: WidgetBinding<any, any>): void {
+        let flowClassName;
+
+        switch (binding.flow) {
+            case "block":
+                flowClassName = "block";
+                break;
+            case "inline":
+                flowClassName = "inline";
+                break;
+            case "none":
+                flowClassName = "placeholder";
+                break;
+            default:
+                console.warn(`Uknown component flow: ${binding.flow}`);
+        }
+
+        element.classList.add(flowClassName);
+
         const reactElement = React.createElement(binding.viewModelClass, {} /* model? */);
         const viewModelInstance = ReactDOM.render(reactElement, element);
         binding.viewModel = viewModelInstance;
