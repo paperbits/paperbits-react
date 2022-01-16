@@ -10,3 +10,4 @@ export class ReactModule implements IInjectorModule {
         componentBinders["react"] = new ReactComponentBinder();
     }
 }
+
