@@ -14,7 +14,7 @@ export class PaperbitsDesigner extends React.Component {
 
     public render(): JSX.Element {
         return (
-            <div className="paperbits-designer" ref={this.ref}>Hello</div>
+            <div className="paperbits-designer" ref={this.ref}></div>
         );
     }
 }
