@@ -26,7 +26,7 @@ export class ReactComponentBinder implements ComponentBinder {
                 flowClassName = "placeholder";
                 break;
             default:
-                console.warn(`Uknown component flow: ${binding.flow}`);
+                console.warn(`Unknown component flow: ${binding.flow}`);
         }
 
         element.classList.add(flowClassName);
