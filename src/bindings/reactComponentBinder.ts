@@ -9,23 +9,17 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { ComponentBinder } from "@paperbits/common/editing/componentBinder";
-import { WidgetBinding } from "@paperbits/common/editing/widgetBinding";
+
 
 export class ReactComponentBinder implements ComponentBinder {
-    public init(element: Element, binding: WidgetBinding<any, any>): void {
-        const reactElement = React.createElement(<any>binding.componentDefinition, {} /* model? */);
-        const viewModelInstance = ReactDOM.render(reactElement, element);
+    public async bind<TInstance>(element: Element, componentDefinition: any, componentParams: unknown): Promise<TInstance> {
+        const reactElement = React.createElement(componentDefinition, componentParams || {});
+        const reactComponentInstance = ReactDOM.render(reactElement, element);
 
-        binding.viewModel = viewModelInstance;
-
-        if (binding.onCreate) {
-            binding.onCreate(viewModelInstance);
-        }
+        return reactComponentInstance;
     }
 
-    public dispose(element: Element, binding: WidgetBinding<any, any>): void {
-        if (binding.onDispose) {
-            binding.onDispose();
-        }
+    public async dispose(element: Element): Promise<void> {
+        // Not supported
     }
 }
