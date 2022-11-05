@@ -9,7 +9,7 @@ This repository contains modules required to create widgets implemented with Rea
 ## Installation
 
 ```bash
-npm i @paperbits/react--save
+npm i @paperbits/react --save
 ```
 
 ## What's next?
