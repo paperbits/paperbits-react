@@ -9,13 +9,26 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { ComponentBinder } from "@paperbits/common/editing/componentBinder";
+import { IInjector } from "@paperbits/common/injection";
+import { ReactComponentWrapper } from "./reactComponentWrapper";
 
 
 export class ReactComponentBinder implements ComponentBinder {
-    public async bind<TInstance>(element: Element, componentDefinition: any, componentParams: unknown): Promise<TInstance> {
-        const reactElement = React.createElement(componentDefinition, componentParams || {});
-        const reactComponentInstance = ReactDOM.render(reactElement, element);
+    constructor(private readonly injector: IInjector) { }
 
+    public async bind<TInstance>(element: Element, componentDefinition: any, componentParams: unknown): Promise<TInstance> {
+        const params = componentParams || {};
+        const componentReference = React.createRef<TInstance>();
+        params["ref"] = componentReference
+
+        const reactElement = React.createElement(ReactComponentWrapper, {
+            inversifyContainer: this.injector["container"], // hack to access private property
+            childComponents: React.createElement(componentDefinition, params)
+        });
+
+        ReactDOM.render(reactElement, element);
+
+        const reactComponentInstance = componentReference.current;
         return reactComponentInstance;
     }
 
