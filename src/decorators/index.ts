@@ -8,4 +8,4 @@
 
 export * from "./runtimeComponent.decorator";
 export * from "./reactRuntimeComponentConfig";
-export * from "./resolve";
+export * from "./resolve.decorator";
