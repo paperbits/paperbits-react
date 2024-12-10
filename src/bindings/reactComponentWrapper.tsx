@@ -5,7 +5,9 @@ import { Provider } from "inversify-react";
 export function ReactComponentWrapper({ inversifyContainer, childComponents }) {
     return (
         <Provider container={inversifyContainer}>
-            {childComponents}
+            <div className="widget widget-react">
+                {childComponents}
+            </div>
         </Provider>
     );
 }
