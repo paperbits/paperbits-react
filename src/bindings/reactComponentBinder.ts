@@ -7,7 +7,7 @@
  */
 
 import * as React from "react";
-import * as ReactDOM from "react-dom";
+import { render } from "../reactDomCompat";
 import { ComponentBinder } from "@paperbits/common/editing/componentBinder";
 import { IInjector } from "@paperbits/common/injection";
 import { ReactComponentWrapper } from "./reactComponentWrapper";
@@ -26,7 +26,7 @@ export class ReactComponentBinder implements ComponentBinder {
             childComponents: React.createElement(componentDefinition, params)
         });
 
-        ReactDOM.render(reactElement, element);
+        render(reactElement, element);
 
         const reactComponentInstance = componentReference.current;
         return reactComponentInstance;

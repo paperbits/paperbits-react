@@ -8,7 +8,7 @@
 
 import "reflect-metadata";
 import * as React from "react";
-import * as ReactDOM from "react-dom";
+import { render } from "./reactDomCompat";
 import * as Utils from "@paperbits/common/utils";
 import { ComponentBinder } from "@paperbits/common/editing";
 import { IInjector } from "@paperbits/common/injection";
@@ -38,7 +38,7 @@ export function registerCustomElement(reactComponent: any, tag: string, injector
             }
             else {
                 const reactElement = React.createElement(reactComponent, props);
-                ReactDOM.render(reactElement, this);
+                render(reactElement, this);
             }
         }
 
