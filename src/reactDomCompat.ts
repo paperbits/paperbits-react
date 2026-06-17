@@ -7,16 +7,19 @@
  */
 
 import * as React from "react";
-import * as ReactDOM from "react-dom";
 import * as ReactDOMClient from "react-dom/client";
 
 const rootMap = new WeakMap<Node, ReactDOMClient.Root>();
 
 /**
  * Backward-compatible wrapper for ReactDOM.render used by legacy Paperbits code.
+ * Uses dynamic require() so webpack does not statically analyse react-dom exports
+ * and emit a "render not found" warning when targeting React 18+.
  */
 export function render(element: React.ReactElement, container: Element | DocumentFragment, callback?: () => void): any {
-    const legacyRender = (<any>ReactDOM).render;
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const reactDOM: any = require("react-dom");
+    const legacyRender = reactDOM["render"];
 
     // React 17 compatibility: use native render when available.
     if (typeof legacyRender === "function") {
@@ -36,7 +39,7 @@ export function render(element: React.ReactElement, container: Element | Documen
         rootMap.set(container, root);
     }
 
-    const flushSync = (<any>ReactDOM).flushSync;
+    const flushSync = reactDOM["flushSync"];
 
     // Legacy code reads refs right after render call, so preserve synchronous timing.
     if (typeof flushSync === "function") {
